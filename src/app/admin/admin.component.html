@@ -5,14 +5,14 @@
   <div class="add-new-product">
     <h3>Add new product</h3>
     <div>
-      <input #name [(ngModel)]="text" type="text" placeholder="Product name">
+      <input #name type="text" placeholder="Product name">
     </div>
 
     <div>
-      <textarea [(ngModel)]="about" type="text" rows="10" cols="30" placeholder="About product"></textarea>
+      <textarea #about type="text" rows="10" cols="30" placeholder="About product"></textarea>
     </div>
 
-    <button (click)="addProduct(text, about)">Add product</button>
+    <button (click)="addProduct(name.value, about.value)">Add product</button>
   </div>
 <!--
   <div class="editProduct">
