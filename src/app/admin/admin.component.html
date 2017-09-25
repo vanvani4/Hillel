@@ -14,17 +14,6 @@
 
     <button (click)="addProduct(name.value, about.value)">Add product</button>
   </div>
-<!--
-  <div class="editProduct">
-    <h3>Edit product</h3>
-
-    <input #name [(ngModel)]="newText" type="text" placeholder={{activeItem?.name}}>
-
-    <textarea [(ngModel)]="newAbout" type="text" rows="10" cols="30" placeholder={{activeItem?.about}}></textarea>
-
-    <button (click)="edit(newText, newAbout, activeItem.id)">Edit</button>
-
-  </div>-->
 </div>
 
 <router-outlet></router-outlet>

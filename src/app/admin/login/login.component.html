@@ -1,4 +1,4 @@
-<div *ngIf="!message && !authService.isLoggedIn">
+<div *ngIf="!message && !authService.isLoggedIn" (keyup.enter)="log(login.value, password.value)">
   <input #login type="text" id="login">
 
   <label for="password">Password</label>
