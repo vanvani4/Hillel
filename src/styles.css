@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+
+html {
+	background: #ccc;
+	display: flex;
+	flex-direction: row;
+	display: -webkit-flex;
+}
+
+.done {
+    text-decoration: line-through;
+}

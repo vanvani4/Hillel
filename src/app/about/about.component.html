@@ -1,0 +1,11 @@
+<div class="box-about-prod">
+    <h1>{{ aboutTitle }}</h1>
+
+    <h2 [class.done]="activeItem.isDone">{{ activeItem?.name }}</h2>
+
+    <h3>{{ activeItem?.about }}</h3>
+
+    <button (click)="changeStyle(activeItem)">Done</button>
+
+    <button (click)="close()">Close</button>
+</div>

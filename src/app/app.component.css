@@ -1,0 +1,23 @@
+nav {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+/* 
+.box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.box-prod-list {
+    border-right-color: blue;
+    border-right-style: solid;
+    border-right-width: 5px;
+    margin-right: 10%;
+} */
+
+.active {
+    color: black;
+    background-color:#4AFF03;
+}
+

@@ -1,0 +1,11 @@
+<div class="editProduct">
+    <h3>Edit product</h3>
+
+    <input [(ngModel)]="newText" type="text" value={{activeItem?.name}}>
+
+    <textarea [(ngModel)]="newAbout" type="text" rows="10" cols="30" value={{activeItem?.about}}></textarea>
+
+    <button (click)="edit(newText, newAbout, activeItem.id)">Edit</button>
+    <button (click)="close()">Close</button>
+
+</div>
