@@ -1,11 +1,35 @@
+<h2>Administration</h2>
+
 <div class="editProduct">
+
     <h3>Edit product</h3>
 
-    <input #name type="text" value={{activeItem?.name}}>
+    <form #productForm="ngForm">
+        <div>
+            <input [(ngModel)]="model.name" 
+                name="name"
+                type="text"
+                #name="ngModel"
+                required
+                minlength="2">
+        </div>
 
-    <textarea #about type="text" rows="10" cols="30" value={{activeItem?.about}}></textarea>
+        <div *ngIf="formErrors.name" class="alert">
+            {{formErrors.name}}
+          </div>
 
-    <button (click)="edit(name.value, about.value, activeItem.id)">Edit</button>
-    <button (click)="close()">Close</button>
+        <div>
+            <textarea [(ngModel)]="model.about" 
+                name="about" 
+                type="text" 
+                rows="10" 
+                cols="30">
+            </textarea>
+        </div> 
 
+        <button [disabled]="productForm.form.invalid" 
+            (click)="edit()">Edit</button>
+
+        <button (click)="close()">Close</button>
+    </form>
 </div>

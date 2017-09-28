@@ -7,7 +7,6 @@ import { AboutComponent } from '../about/about.component';
 const routes: Routes = [
   {path: 'product', component: ProductListComponent,
     children: [ 
-    {path: '', component: AboutComponent},
     {path: ':id', component: AboutComponent},
     ]
   },
