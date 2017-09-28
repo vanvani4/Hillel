@@ -5,36 +5,8 @@
 }
 
 .add-new-product {
-    /* border: solid red 2px; */
     display: flex;
 	flex-direction: column;
     display: -webkit-flex;
     margin-right: 5px;
-}
-
-.editProduct {
-    border: solid red 2px;
-    display: flex;
-	flex-direction: column;
-    display: -webkit-flex;
-    margin-right: 15px;
-}
-
-.log-out {
-    display: flex;
-    flex-direction: column;
-    display: -webkit-flex;
-    margin-top: 10px;
-}
-
-.ng-dirty.ng-invalid:not(form) {
-    border: 2px solid red;
-}
-
-.ng-dirty.ng-valid[required]:not(form) {
-    border: 2px solid green;
-}
-
-.alert {
-    color: red;
 }

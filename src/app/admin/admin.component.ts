@@ -73,8 +73,4 @@ export class AdminComponent implements OnInit, AfterViewInit {
   addProduct() {
     this.product.add(this.model.name, this.model.about);
   }
-
-  edit(newAbout, newText, id) {
-    this.product.editProduct(newText, newAbout, id);
-  }
 }

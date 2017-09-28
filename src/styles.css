@@ -10,3 +10,15 @@ html {
 .done {
     text-decoration: line-through;
 }
+
+.alert {
+    color: red;
+}
+
+.ng-dirty.ng-invalid:not(form) {
+    border: 2px solid red;
+}
+
+.ng-dirty.ng-valid[required]:not(form) {
+    border: 2px solid green;
+}
