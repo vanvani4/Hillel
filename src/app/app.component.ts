@@ -9,8 +9,6 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'Product List';
   productList: any;
-  //path: string = '/about';
-
 
   constructor () {
   }

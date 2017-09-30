@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router'
-//import { NgModel } from "@angular/forms"
 
 import { ProductService } from './product.service'
 import { Product } from './product'
@@ -14,14 +13,12 @@ export class ProductListComponent implements OnInit {
 
     productList: Product[];
     lastId: number;
-    disabled: boolean = false;
+    disabled: boolean = true;
 
     constructor(private product: ProductService, private router: Router, private activedRoute: ActivatedRoute) {
         this.product.getAll().then(data => {
             this.productList = data;
         });
-
-        this.activedRoute.params.subscribe(params => console.log(params));
     }
 
     ngOnInit() { };
@@ -29,6 +26,7 @@ export class ProductListComponent implements OnInit {
     goToAbout(item) {
         this.lastId = item.id;
         this.router.navigate([item.id], { relativeTo: this.activedRoute });
+        this.switch();
     }
 
     isLast(item: Product) {
@@ -36,24 +34,20 @@ export class ProductListComponent implements OnInit {
     }
 
     switch() {
-        return false;
+        if (this.lastId > 0 && this.lastId != this.productList.length) {
+            this.disabled = false;
+        }
     }
 
     next() {
-        if(this.lastId >= this.productList.length) {
-            this.switch();
-        }else{
-            this.lastId++
-            this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
-        }
+        this.lastId++
+        this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
+        this.switch()
     }
 
     back() {
-        if(this.lastId < 0) {
-            this.switch();
-        }else{
-            this.lastId--
-            this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
-        }
+        this.lastId--
+        this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
+        this.switch()
     }
 }

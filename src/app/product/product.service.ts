@@ -33,6 +33,5 @@ export class ProductService {
   editProduct(newText, newAbout, id) {
     productList[id].name = newText;
     productList[id].about = newAbout;
-    //console.log(productList[id]);
   }
 }
