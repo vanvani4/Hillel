@@ -31,7 +31,7 @@ export class AdminEditComponent implements OnInit, AfterViewInit {
         }
     }
 
-    @ViewChild("productForm") form: NgForm;
+    @ViewChild("productForm") form: NgForm; // забрасываем форму.
     constructor(private authService: AuthService,
         private product: ProductService,
         private router: Router,
@@ -43,6 +43,7 @@ export class AdminEditComponent implements OnInit, AfterViewInit {
                 this.activeItem = data[this.id];
             });
         });
+        
     }
 
     edit() {
@@ -53,13 +54,13 @@ export class AdminEditComponent implements OnInit, AfterViewInit {
         this.router.navigate(['admin']);
     }
 
-    ngAfterViewInit() {
-        this.form.valueChanges.subscribe(data => this.onValueChanged(data))
-    }
+    ngAfterViewInit() { //подписка на изменения после отрисовки всего
+        this.form.valueChanges.subscribe(data => this.onValueChanged(data)) //valueChanges - это поставщик данных которые меняются (Observable).
+    }                                                                       // subscribe - подписка на изменения.
 
-    onValueChanged(data) {
-        const { form } = this.form;
-
+    onValueChanged(data) { // data объект с name и about
+        const { form } = this.form; // деструктуризация в перемнную
+        
         for (let key in this.formErrors) {
             this.formErrors[key] = "";
             const controll = form.get(key);
@@ -74,6 +75,6 @@ export class AdminEditComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-
+        //console.log(this.form);
     }
 }

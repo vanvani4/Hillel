@@ -7,8 +7,9 @@
           type="text" 
           id="login"
           name="login"
-          #name="ngModel"
+          #name="ngModel" 
           required>
+          <!-- #name без равно HTML, c равно привязано к "ngModel" -->
     </div>
 
     <div *ngIf="formErrors.login" class="alert">

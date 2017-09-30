@@ -22,3 +22,6 @@ html {
 .ng-dirty.ng-valid[required]:not(form) {
     border: 2px solid green;
 }
+
+/* :not(form) - не для форм */
+/* ng-valid[required] только для полей required */
