@@ -17,7 +17,6 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
 
   title = 'Product List';
-  productList: any;
   private id: number;
   private activeItem: Product;
   model: Product = new Product(0, "", false, "");

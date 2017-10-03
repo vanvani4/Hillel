@@ -16,7 +16,7 @@ import { Product } from '../../product/product';
 export class AdminEditComponent implements OnInit, AfterViewInit {
 
     title = 'Product List';
-    productList: any;
+    //productList: any;
     private id: number;
     private activeItem: Product;
 

@@ -12,7 +12,7 @@ import { User } from './user';
 })
 export class LoginComponent implements OnInit, AfterViewInit {
 
-  user = new User('','');
+  user: User = new User('','');
 
   formErrors = {
     login: "",

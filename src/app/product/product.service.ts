@@ -13,7 +13,7 @@ let productListPromise = Promise.resolve(productList);
 @Injectable()
 export class ProductService {
     
-  add(text, about) {
+  add(text: string, about: string) {
     productList.push(new Product(productList.length, text, false, about)); 
   }
     
@@ -30,7 +30,7 @@ export class ProductService {
     .then((data) => data.find(item => item.id === id));
   }
 
-  editProduct(newText, newAbout, id) {
+  editProduct(newText: string, newAbout: string, id: number) {
     productList[id].name = newText;
     productList[id].about = newAbout;
   }

@@ -15,7 +15,7 @@ import { Product } from '../product/product';
 })
 export class AboutComponent {
 
-    aboutTitle = 'About Product';
+    aboutTitle: string = 'About Product';
     private id: number;
     private activeItem: Product;
     
@@ -36,8 +36,4 @@ export class AboutComponent {
     close() {
         this.router.navigate(['product']);
     }
-
-    /*goToAboutDetails(item) {
-        this.router.navigate(['/about', item.id]);
-      }*/
 }
