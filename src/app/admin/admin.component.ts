@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, /*ViewChild, AfterViewInit*/ } from '@angular/core';
 import { ProductService } from '../product/product.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+//import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import { AuthService } from './auth.service';
 import { Product } from '../product/product';
@@ -13,18 +13,19 @@ import { Product } from '../product/product';
   styleUrls: ['./admin.component.css'],
   providers: [ProductService, AuthService]
 })
-export class AdminComponent implements OnInit, AfterViewInit {
+export class AdminComponent implements OnInit {
 
 
   title = 'Product List';
-  private id: number;
-  private activeItem: Product;
-  model: Product = new Product(0, "", false, "");
-  
+  //private id: number;
+  //private activeItem: Product;
+
+  adminForm: FormGroup;
+
   formErrors = {
     name: ''
   };
-  
+
   validationMessages = {
     name: {
       required: "Can not be empty",
@@ -32,44 +33,43 @@ export class AdminComponent implements OnInit, AfterViewInit {
     }
   }
 
-  @ViewChild("productForm") form: NgForm;
   constructor(private authService: AuthService,
     private product: ProductService,
-    private router: Router,
-    private activedRoute: ActivatedRoute,
+    //private router: Router,
+    //private activedRoute: ActivatedRoute,
+    private fb: FormBuilder
   ) {
-    this.activedRoute.params.subscribe(params => {
-      this.id = params['id'];
-      this.product.getAll().then(data => {
-        this.activeItem = data[this.id];
-      });
-    });
+    // this.activedRoute.params.subscribe(params => {
+    //   this.id = params['id'];
+    //   this.product.getAll().then(data => {
+    //     this.activeItem = data[this.id];
+    //   });
+    // });
   }
 
   ngOnInit() {
+
+    this.adminForm = this.fb.group({
+      name: ["admin", [Validators.required, Validators.minLength(2)]],
+      about: [""]
+    })
+
+    this.adminForm.valueChanges.subscribe(data => this.valueChanged(data));
   }
 
-  ngAfterViewInit() {
-    this.form.valueChanges.subscribe(data => this.onValueChanged(data))
-  }
-
-  onValueChanged(data) {
-    const { form } = this.form;
-
-    for (let key in this.formErrors) {
-      this.formErrors[key] = "";
-      const controll = form.get(key);
-      if (controll && controll.errors && controll.dirty) {
-        const message = this.validationMessages[key];
-
-        for (let i in controll.errors) {
-          this.formErrors[key] = message[i];
+  valueChanged(data) {
+    for (let field in this.formErrors) {
+      this.formErrors[field] = "";
+      const control = this.adminForm.get(field);
+      if (control.dirty) {
+        for (let key in control.errors) {
+          this.formErrors[field] = this.validationMessages[field][key];
         }
       }
     }
   }
 
-  addProduct() {
-    this.product.add(this.model.name, this.model.about);
+  addProduct(adminForm: FormGroup) {
+    this.product.add(adminForm.value.name, adminForm.value.about);
   }
 }
