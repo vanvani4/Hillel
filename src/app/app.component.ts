@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   title = 'Product List';
   productList: any;
 
-  constructor () {
+  constructor() {
   }
 
   ngOnInit() {

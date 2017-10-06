@@ -6,15 +6,14 @@
 
     <h3>Add new product</h3>
 
-    <form #productForm="ngForm">
+    <form [formGroup]="adminForm"
+          novalidate
+          (ngSubmit)="addProduct(adminForm)">
+
       <div>
-        <input [(ngModel)]="model.name" 
-          name="name" 
+        <input formControlName="name"
           type="text"
-          #name="ngModel" 
-          placeholder="Product name" 
-          required
-          minlength="2">
+          placeholder="Product name">
       </div>
       
       <div *ngIf="formErrors.name" class="alert">
@@ -22,8 +21,7 @@
       </div>
 
       <div>
-        <textarea [(ngModel)]="model.about" 
-          name="about" 
+        <textarea formControlName="about"
           type="text" 
           rows="10" 
           cols="30" 
@@ -31,9 +29,7 @@
         </textarea>
       </div>
 
-      <button [disabled]="productForm.form.invalid" 
-          (click)="addProduct()">Add product
-      </button>
+      <button [disabled]="adminForm.invalid">Add product</button>
       
     </form>
   </div>

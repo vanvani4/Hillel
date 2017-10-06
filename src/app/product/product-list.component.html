@@ -9,8 +9,8 @@
         </ul>
     </div>
 
-<button #disabled (click)="back()" [disabled]="disabled">Back</button>
-<button #disabled (click)="next()" [disabled]="disabled">Next</button>
+<button (click)="back()" [disabled]="disabledBack">Back</button>
+<button (click)="next()" [disabled]="disabledNext">Next</button>
 </div>
 
 <router-outlet></router-outlet>

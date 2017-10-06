@@ -12,11 +12,11 @@ let productListPromise = Promise.resolve(productList);
 
 @Injectable()
 export class ProductService {
-    
-  add(text, about) {
-    productList.push(new Product(productList.length, text, false, about)); 
+
+  add(text: string, about: string) {
+    productList.push(new Product(productList.length, text, false, about));
   }
-    
+
   change(item) {
     item.isDone = !item.isDone;
   }
@@ -25,12 +25,12 @@ export class ProductService {
     return productListPromise;
   }
 
-  getActiveObj (id: number): Promise<Product> {
+  getActiveObj(id: number): Promise<Product> {
     return productListPromise
-    .then((data) => data.find(item => item.id === id));
+      .then((data) => data.find(item => item.id === id));
   }
 
-  editProduct(newText, newAbout, id) {
+  editProduct(newText: string, newAbout: string, id: number) {
     productList[id].name = newText;
     productList[id].about = newAbout;
   }
