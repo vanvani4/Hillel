@@ -62,7 +62,8 @@ export class LoginComponent implements OnInit {
     this.message = "Wait please"; //пока не вернулся ответ, показываем сообщение.
     this.authService.login(this.loginForm.value.login, this.loginForm.value.password)
       .subscribe(() => {
-        this.router.navigate([this.authService.redirectUrl]); // если валидация прошла, указываем куда перейти (куда собирались)
+        this.router.navigate([this.authService.redirectUrl]);// если валидация прошла, указываем куда перейти (куда собирались)
+        this.message='';
       });
   }
 
