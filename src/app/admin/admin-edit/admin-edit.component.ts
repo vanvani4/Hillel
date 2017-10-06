@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ProductService } from '../../product/product.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import { AuthService } from '../auth.service';
 import { Product } from '../../product/product';
@@ -13,14 +14,13 @@ import { Product } from '../../product/product';
     styleUrls: ['./admin-edit.component.css'],
     providers: [ProductService]
 })
-export class AdminEditComponent implements OnInit, AfterViewInit {
+export class AdminEditComponent implements OnInit {
 
     title = 'Product List';
-    //productList: any;
     private id: number;
     private activeItem: Product;
+    editForm: FormGroup;
 
-    model: Product = new Product(0, "", false, "");
     formErrors = {
         name: ''
     };
@@ -31,50 +31,50 @@ export class AdminEditComponent implements OnInit, AfterViewInit {
         }
     }
 
-    @ViewChild("productForm") form: NgForm; // забрасываем форму.
     constructor(private authService: AuthService,
         private product: ProductService,
         private router: Router,
         private activedRoute: ActivatedRoute,
+        private fb: FormBuilder
     ) {
         this.activedRoute.params.subscribe(params => {
             this.id = params['id'];
             this.product.getAll().then(data => {
                 this.activeItem = data[this.id];
+                this.formInit();
             });
         });
-        
+
     }
 
-    edit() {
-        this.product.editProduct(this.model.name, this.model.about, this.id);
+    ngOnInit() {
+    }
+
+    valueChanged(data) {
+        for (let field in this.formErrors) {
+            this.formErrors[field] = "";
+            const control = this.editForm.get(field);
+            if (control.dirty) {
+                for (let key in control.errors) {
+                    this.formErrors[field] = this.validationMessages[field][key];
+                }
+            }
+        }
+    }
+
+    edit(editForm: FormGroup) {
+        this.product.editProduct(editForm.value.name, editForm.value.about, this.id);
     }
 
     close() {
         this.router.navigate(['admin']);
     }
 
-    ngAfterViewInit() { //подписка на изменения после отрисовки всего
-        this.form.valueChanges.subscribe(data => this.onValueChanged(data)) //valueChanges - это поставщик данных которые меняются (Observable).
-    }                                                                       // subscribe - подписка на изменения.
-
-    onValueChanged(data) { // data объект с name и about
-        const { form } = this.form; // деструктуризация в перемнную
-        
-        for (let key in this.formErrors) {
-            this.formErrors[key] = "";
-            const controll = form.get(key);
-            if (controll && controll.errors && controll.dirty) {
-                const message = this.validationMessages[key];
-
-                for (let i in controll.errors) {
-                    this.formErrors[key] = message[i];
-                }
-            }
-        }
-    }
-
-    ngOnInit() {
-        //console.log(this.form);
+    formInit() {
+        this.editForm = this.fb.group({
+            name: [this.activeItem.name, [Validators.required, Validators.minLength(2)]],
+            about: [this.activeItem.about]
+        })
+        this.editForm.valueChanges.subscribe(data => this.valueChanged(data));
     }
 }

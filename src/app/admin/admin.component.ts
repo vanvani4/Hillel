@@ -1,6 +1,5 @@
-import { Component, OnInit, /*ViewChild, AfterViewInit*/ } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product/product.service';
-//import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
@@ -17,8 +16,6 @@ export class AdminComponent implements OnInit {
 
 
   title = 'Product List';
-  //private id: number;
-  //private activeItem: Product;
 
   adminForm: FormGroup;
 
@@ -35,22 +32,13 @@ export class AdminComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private product: ProductService,
-    //private router: Router,
-    //private activedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {
-    // this.activedRoute.params.subscribe(params => {
-    //   this.id = params['id'];
-    //   this.product.getAll().then(data => {
-    //     this.activeItem = data[this.id];
-    //   });
-    // });
+    private fb: FormBuilder) {
   }
 
   ngOnInit() {
 
     this.adminForm = this.fb.group({
-      name: ["admin", [Validators.required, Validators.minLength(2)]],
+      name: ["", [Validators.required, Validators.minLength(2)]],
       about: [""]
     })
 

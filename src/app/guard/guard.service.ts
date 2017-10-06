@@ -17,13 +17,13 @@ export class GuardService {
 
     login(login: string, password: string) {
         return Observable
-        .of(true)
-        .delay(1000)
-        .do(val => {
-            if(login === "admin" && password === "pass"){
-                this.isLoggedIn = true;
-                return this.isLoggedIn;
-            }
-        })
+            .of(true)
+            .delay(1000)
+            .do(val => {
+                if (login === "admin" && password === "pass") {
+                    this.isLoggedIn = true;
+                    return this.isLoggedIn;
+                }
+            })
     }
 }

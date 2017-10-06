@@ -13,7 +13,8 @@ export class ProductListComponent implements OnInit {
 
     productList: Product[];
     lastId: number;
-    disabled: boolean = true;
+    disabledBack: boolean = false;
+    disabledNext: boolean = false;
 
     constructor(private product: ProductService, private router: Router, private activedRoute: ActivatedRoute) {
         this.product.getAll().then(data => {
@@ -26,28 +27,29 @@ export class ProductListComponent implements OnInit {
     goToAbout(item) {
         this.lastId = item.id;
         this.router.navigate([item.id], { relativeTo: this.activedRoute });
-        this.switch();
     }
 
     isLast(item: Product) {
         return item.id === this.lastId;
     }
 
-    switch() {
-        if (this.lastId > 0 && this.lastId != this.productList.length) {
-            this.disabled = false;
+    next() {
+        if (this.lastId === this.productList.length - 1) {
+            return this.disabledNext = true;
+        } else {
+            this.lastId++;
+            this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
+            return [this.disabledNext = false, this.disabledBack = false];
         }
     }
 
-    next() {
-        this.lastId++
-        this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
-        this.switch()
-    }
-
     back() {
-        this.lastId--
-        this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
-        this.switch()
+        if (this.lastId === 0) {
+            return this.disabledBack = true;
+        } else {
+            this.lastId--;
+            this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
+            return [this.disabledNext = false, this.disabledBack = false];
+        }
     }
 }

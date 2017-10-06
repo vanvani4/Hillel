@@ -19,13 +19,13 @@ export class AuthService {
         this.isLoggedIn = false;
     }
 
-    
+
     login(login: string, password: string) { //запрос к серверу (будет), операция асинхронная, возвращает Observable.
         return Observable
             .of(true)
             .delay(1000) // сделано специально, задержка 1 секунда (имитация запроса к серверу)
             .do(val => { // результат пришлёт сервер
-                if (login === 'admin' && password === 'pass') {
+                if (login === 'admin@admin.com' && password === 'pass') {
                     this.isLoggedIn = true;
                     return this.isLoggedIn;
                 }

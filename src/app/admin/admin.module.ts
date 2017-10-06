@@ -18,7 +18,7 @@ import { AuthService } from './auth.service'; // подключаем в admin.m
     ReactiveFormsModule
   ],
   declarations: [
-    AdminComponent, 
+    AdminComponent,
     LoginComponent,
     AdminEditComponent
   ],

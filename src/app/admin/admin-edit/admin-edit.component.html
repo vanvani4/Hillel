@@ -4,32 +4,24 @@
 
     <h3>Edit product</h3>
 
-    <form #productForm="ngForm">
+    <form [formGroup]="editForm" novalidate (ngSubmit)="edit(editForm)">
         <div>
-            <input [(ngModel)]="model.name" 
-                name="name"
-                type="text"
-                #name="ngModel"
-                required
-                minlength="2">
+            <input formControlName="name" type="text">
         </div>
 
         <div *ngIf="formErrors.name" class="alert">
             {{formErrors.name}}
-          </div>
+        </div>
 
         <div>
-            <textarea [(ngModel)]="model.about" 
-                name="about" 
+            <textarea formControlName="about"
                 type="text" 
                 rows="10" 
                 cols="30">
             </textarea>
         </div> 
 
-        <button [disabled]="productForm.form.invalid" 
-            (click)="edit()">Edit</button>
-
-        <button (click)="close()">Close edit</button>
+        <button [disabled]="editForm.invalid">Edit</button>
     </form>
+    <button (click)="close()">Close edit</button>
 </div>
