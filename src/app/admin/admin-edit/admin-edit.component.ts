@@ -39,15 +39,7 @@ export class AdminEditComponent implements OnInit {
     ) {
         this.activedRoute.params.subscribe(params => {
             this.id = params['id'];
-            //this.product.getActiveObj(this.id)
-            // .map((data:Response)=>data.json())
-            // .subscribe(data => {
-            //     this.activeItem = data[this.id];
-            //     this.formInit();
-            // });
             this.activeItem = this.product.getActiveObj(this.id);
-            // this.activeItem.find(item => item.this.id === this.id)//[this.id];
-            console.log(this.activeItem);
             this.formInit();
         });
 

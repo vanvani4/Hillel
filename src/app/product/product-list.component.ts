@@ -18,11 +18,7 @@ export class ProductListComponent implements OnInit {
     disabledNext: boolean = false;
 
     constructor(private product: ProductService, private router: Router, private activedRoute: ActivatedRoute) {
-        this.productList = this.product.getAll();
-
-        // //this.productList = this.product.getAll();
-        // console.log(this.productList);
-        
+        this.productList = this.product.getAll();    
     }
 
     ngOnInit() { 
