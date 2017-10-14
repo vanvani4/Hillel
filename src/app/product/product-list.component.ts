@@ -7,22 +7,26 @@ import { Product } from './product'
 @Component({
     selector: 'product-list',
     templateUrl: './product-list.component.html',
-    styleUrls: ['./product-list.component.css']
+    styleUrls: ['./product-list.component.css'],
+    providers: [ProductService]
 })
 export class ProductListComponent implements OnInit {
 
-    productList: Product[];
+    productList;
     lastId: number;
     disabledBack: boolean = false;
     disabledNext: boolean = false;
 
     constructor(private product: ProductService, private router: Router, private activedRoute: ActivatedRoute) {
-        this.product.getAll().then(data => {
-            this.productList = data;
-        });
+        this.productList = this.product.getAll();
+
+        // //this.productList = this.product.getAll();
+        // console.log(this.productList);
+        
     }
 
-    ngOnInit() { };
+    ngOnInit() { 
+    };
 
     goToAbout(item) {
         this.lastId = item.id;

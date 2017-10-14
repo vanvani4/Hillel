@@ -23,14 +23,17 @@ export class AboutComponent {
     constructor (private product: ProductService, private route: ActivatedRoute, private router: Router) { 
         this.route.params.subscribe(params => {
             this.id = params['id'];
-            this.product.getAll().then(data => {
-                this.activeItem = data[this.id];
-            });
+            // this.product.getAll().subscribe(data => {
+            //     this.activeItem = data[this.id];
+            // });
+            this.activeItem = this.product.getAll()[this.id];
         });
     }
 
     changeStyle(activeItem) {
         this.product.change(activeItem);
+        console.log(activeItem);
+        
     }
 
     close() {

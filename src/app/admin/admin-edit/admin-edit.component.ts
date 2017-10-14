@@ -18,7 +18,7 @@ export class AdminEditComponent implements OnInit {
 
     title = 'Product List';
     private id: number;
-    private activeItem: Product;
+    private activeItem;
     editForm: FormGroup;
 
     formErrors = {
@@ -39,10 +39,16 @@ export class AdminEditComponent implements OnInit {
     ) {
         this.activedRoute.params.subscribe(params => {
             this.id = params['id'];
-            this.product.getAll().then(data => {
-                this.activeItem = data[this.id];
-                this.formInit();
-            });
+            //this.product.getActiveObj(this.id)
+            // .map((data:Response)=>data.json())
+            // .subscribe(data => {
+            //     this.activeItem = data[this.id];
+            //     this.formInit();
+            // });
+            this.activeItem = this.product.getActiveObj(this.id);
+            // this.activeItem.find(item => item.this.id === this.id)//[this.id];
+            console.log(this.activeItem);
+            this.formInit();
         });
 
     }
@@ -75,6 +81,7 @@ export class AdminEditComponent implements OnInit {
             name: [this.activeItem.name, [Validators.required, Validators.minLength(2)]],
             about: [this.activeItem.about]
         })
-        this.editForm.valueChanges.subscribe(data => this.valueChanged(data));
+        //this.editForm.valueChanges.subscribe(data => this.valueChanged(data));
     }
 }
+

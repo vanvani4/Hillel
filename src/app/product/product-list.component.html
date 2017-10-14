@@ -5,7 +5,7 @@
         <ul *ngFor="let item of productList" routerLink="about/{{lastId}}" 
             [class.done]="item.isDone" (click)="goToAbout(item)" [class.last]='isLast(item)' 
             routerLinkActive="active">
-            <li>{{ item.name }}</li>
+            <li>{{item.id}} - {{ item.name }} - {{item.about}} - {{item.isDone}}</li>
         </ul>
     </div>
 

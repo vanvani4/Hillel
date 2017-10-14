@@ -1,37 +1,64 @@
 import { Injectable } from '@angular/core';
+import { Http, Response, Headers } from '@angular/http';
+
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 import { Product } from './product';
 
-let productList: Product[] = [
-  new Product(0, "Молоко", false, "1 литр"),
-  new Product(1, "Хлеб", false, "Батон, 1 штука"),
-  new Product(2, "Вода", false, "6 литров")
-]
+let productList;
 
-let productListPromise = Promise.resolve(productList);
+let Obs;
 
 @Injectable()
 export class ProductService {
+  constructor(private http: Http) { }
 
   add(text: string, about: string) {
-    productList.push(new Product(productList.length, text, false, about));
+    this.http.post('http://localhost:3000/admin', { text, about })
+      .map((data: Response) => data.json())
+      .subscribe(data => {
+        productList = data;
+      })
   }
 
   change(item) {
     item.isDone = !item.isDone;
   }
 
-  getAll(): Promise<Product[]> {
-    return productListPromise;
+  getAll() {
+    this.http.get('http://localhost:3000/product')
+      .map((data: Response) => data.json())
+      .subscribe(data => {
+        productList = data;
+      })
+    return productList;
   }
 
-  getActiveObj(id: number): Promise<Product> {
-    return productListPromise
-      .then((data) => data.find(item => item.id === id));
+
+  getActiveObj(id: number) {
+    let activeObj = productList[id];
+    return activeObj;
   }
+
+
+  //   if (item.id === idl) {
+  //     console.log(item.id);
+
+  //     activeObj = item;
+  //   }
+  // });
+  // //console.log(activeObj);
+  // return activeObj;
 
   editProduct(newText: string, newAbout: string, id: number) {
-    productList[id].name = newText;
-    productList[id].about = newAbout;
+    this.http.post('http://localhost:3000/admin/id', { newText, newAbout, id })
+      .map((data: Response) => data.json())
+      .subscribe(data => {
+        productList = data;
+      })
   }
 }

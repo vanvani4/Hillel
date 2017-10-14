@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpModule} from '@angular/http';
 
 import { ProductRoutingModule } from './product-routing.module';
 import { AboutComponent } from '../about/about.component';
@@ -10,7 +11,8 @@ export { ProductListComponent };
 @NgModule({
   imports: [
     CommonModule,
-    ProductRoutingModule
+    ProductRoutingModule,
+    HttpModule
   ],
   declarations: [
     AboutComponent,
