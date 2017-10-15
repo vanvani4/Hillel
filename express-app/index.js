@@ -25,7 +25,8 @@ var prod = [{
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:4200");
-  res.header("Access-Control-Allow-Headers", /*"Access-Control-Allow-Methods",*/ "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
   next();
 });
 
@@ -36,14 +37,14 @@ app.get('/product', function (req, res) {
   console.log('get product');
 });
 
-app.post('/admin', function (req, res) {
+app.put('/admin', function (req, res) {
   prod.push({"id": prod.length, "name": req.body.text, "isDone": false, "about": req.body.about})
+  res.json(prod.length);
 });
 
-app.post('/admin/id', function (req, res) {
+app.put('/admin/id', function (req, res) {
   prod[req.body.id].name = req.body.newText;
   prod[req.body.id].about = req.body.newAbout;
-  console.log(prod[req.body.id]);
 });
 
 app.listen(3000, function () {
