@@ -18,11 +18,15 @@ export class ProductListComponent implements OnInit {
     disabledNext: boolean = false;
 
     constructor(private product: ProductService, private router: Router, private activedRoute: ActivatedRoute) {
-        this.productList = this.product.getAll();    
     }
 
-    ngOnInit() { 
-    };
+    ngOnInit() {
+        this.product.getProductListObs()
+            .map((data: Response) => data.json())
+            .subscribe(data => {
+                this.productList = data;
+            })
+    }
 
     goToAbout(item) {
         this.lastId = item.id;

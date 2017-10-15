@@ -40,6 +40,7 @@ export class AdminEditComponent implements OnInit {
         this.activedRoute.params.subscribe(params => {
             this.id = params['id'];
             this.activeItem = this.product.getActiveObj(this.id);
+            this.product.getProductList()
             this.formInit();
         });
 
@@ -73,7 +74,6 @@ export class AdminEditComponent implements OnInit {
             name: [this.activeItem.name, [Validators.required, Validators.minLength(2)]],
             about: [this.activeItem.about]
         })
-        //this.editForm.valueChanges.subscribe(data => this.valueChanged(data));
     }
 }
 
