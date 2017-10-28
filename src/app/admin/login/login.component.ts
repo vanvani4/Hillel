@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from '../auth.service'; //после того как подключили в admin.module, подключаем в component
+import { AuthService } from '../auth.service'; // после того как подключили в admin.module, подключаем в component
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
@@ -16,19 +16,19 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   formErrors = {
-    login: "",
-    password: ""
+    login: '',
+    password: ''
   };
 
   validationMessages = {
     login: {
-      required: "Field login can not be empty",
-      email: "Please enter valid email!!!"
+      required: 'Field login can not be empty',
+      email: 'Please enter valid email!!!'
     },
     password: {
-      required: "Field password can not be empty"
+      required: 'Field password can not be empty'
     }
-  }
+  };
 
 
   constructor(private authService: AuthService,
@@ -39,19 +39,19 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      login: ["", [Validators.required, Validators.email]],
-      password: ["", Validators.required]
-    })
+      login: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
 
     this.loginForm.valueChanges.subscribe(data => this.valueChanged(data));
   }
 
   valueChanged(data) {
-    for (let field in this.formErrors) {
-      this.formErrors[field] = "";
+    for (const field in this.formErrors) {
+      this.formErrors[field] = '';
       const control = this.loginForm.get(field);
       if (control.dirty) {
-        for (let key in control.errors) {
+        for (const key in control.errors) {
           this.formErrors[field] = this.validationMessages[field][key];
         }
       }
@@ -59,16 +59,16 @@ export class LoginComponent implements OnInit {
   }
 
   log() {
-    this.message = "Wait please"; //пока не вернулся ответ, показываем сообщение.
+    this.message = 'Wait please'; // пока не вернулся ответ, показываем сообщение.
     this.authService.login(this.loginForm.value.login, this.loginForm.value.password)
       .subscribe(() => {
-        this.router.navigate([this.authService.redirectUrl]);// если валидация прошла, указываем куда перейти (куда собирались)
-        this.message='';
+        this.router.navigate([this.authService.redirectUrl]); // если валидация прошла, указываем куда перейти (куда собирались)
+        this.message = '';
       });
   }
 
   logOut() {
-    this.authService.logout(); //в реальной жизни отсылаем запрос на сервер, который анулирует сессию.
+    this.authService.logout(); // в реальной жизни отсылаем запрос на сервер, который анулирует сессию.
   }
 
 }

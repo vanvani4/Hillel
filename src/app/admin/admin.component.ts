@@ -14,7 +14,6 @@ import { Product } from '../product/product';
 })
 export class AdminComponent implements OnInit {
 
-
   title = 'Product List';
 
   adminForm: FormGroup;
@@ -25,10 +24,10 @@ export class AdminComponent implements OnInit {
 
   validationMessages = {
     name: {
-      required: "Can not be empty",
-      minlength: "Minimum 2 letters"
+      required: 'Can not be empty',
+      minlength: 'Minimum 2 letters'
     }
-  }
+  };
 
   constructor(private authService: AuthService,
     private product: ProductService,
@@ -38,19 +37,19 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
 
     this.adminForm = this.fb.group({
-      name: ["", [Validators.required, Validators.minLength(2)]],
-      about: [""]
-    })
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      about: ['']
+    });
 
     this.adminForm.valueChanges.subscribe(data => this.valueChanged(data));
   }
 
   valueChanged(data) {
-    for (let field in this.formErrors) {
-      this.formErrors[field] = "";
+    for (const field in this.formErrors) {
+      this.formErrors[field] = '';
       const control = this.adminForm.get(field);
       if (control.dirty) {
-        for (let key in control.errors) {
+        for (const key in control.errors) {
           this.formErrors[field] = this.validationMessages[field][key];
         }
       }

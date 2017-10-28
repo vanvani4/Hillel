@@ -3,14 +3,17 @@
     <div class="box-prod-list">
         <h1>{{ title }}</h1>
         <ul *ngFor="let item of productList" routerLink="about/{{lastId}}" 
-            [class.done]="item.isDone" (click)="goToAbout(item)" [class.last]='isLast(item)' 
+            [class.done]="item.isDone" 
+            (click)="goToAbout(item)" 
+            [class.last]="isLast(item)"
             routerLinkActive="active">
             <li>{{ item.name }}</li>
         </ul>
     </div>
 
-<button (click)="back()" [disabled]="disabledBack">Back</button>
-<button (click)="next()" [disabled]="disabledNext">Next</button>
+    <button (click)="back()" [disabled]="disabledBack">Back</button>
+    <button (click)="next()" [disabled]="disabledNext">Next</button>
+    <button (click)="delete()" [disabled]="" >Delete</button>
 </div>
 
 <router-outlet></router-outlet>

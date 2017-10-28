@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AdminComponent } from './admin.component';
+import { AuthService } from './auth.service';
+import { ProductService } from '../product/product.service';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -8,7 +14,9 @@ describe('AdminComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminComponent ]
+      imports: [ FormsModule, ReactiveFormsModule, RouterTestingModule, HttpModule ],
+      declarations: [ AdminComponent ],
+      providers: [ AuthService, ProductService ]
     })
     .compileComponents();
   }));

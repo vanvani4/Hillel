@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router'
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { ProductService } from './product.service'
-import { Product } from './product'
+import { ProductService } from './product.service';
+import { Product } from './product';
 
 @Component({
     selector: 'product-list',
@@ -14,8 +14,8 @@ export class ProductListComponent implements OnInit {
 
     productList;
     lastId: number;
-    disabledBack: boolean = false;
-    disabledNext: boolean = false;
+    disabledBack = false;
+    disabledNext = false;
 
     constructor(private product: ProductService, private router: Router, private activedRoute: ActivatedRoute) {
     }
@@ -25,7 +25,7 @@ export class ProductListComponent implements OnInit {
             .map((data: Response) => data.json())
             .subscribe(data => {
                 this.productList = data;
-            })
+            });
     }
 
     goToAbout(item) {
@@ -37,23 +37,27 @@ export class ProductListComponent implements OnInit {
         return item.id === this.lastId;
     }
 
-    next() {
-        if (this.lastId === this.productList.length - 1) {
-            return this.disabledNext = true;
-        } else {
-            this.lastId++;
-            this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
-            return [this.disabledNext = false, this.disabledBack = false];
-        }
-    }
+    // next() {
+    //     if (this.lastId === this.productList.length - 1) {
+    //         return this.disabledNext = true;
+    //     } else {
+    //         this.lastId++;
+    //         this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
+    //         return [this.disabledNext = false, this.disabledBack = false];
+    //     }
+    // }
 
-    back() {
-        if (this.lastId === 0) {
-            return this.disabledBack = true;
-        } else {
-            this.lastId--;
-            this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
-            return [this.disabledNext = false, this.disabledBack = false];
-        }
+    // back() {
+    //     if (this.lastId === 0) {
+    //         return this.disabledBack = true;
+    //     } else {
+    //         this.lastId--;
+    //         this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
+    //         return [this.disabledNext = false, this.disabledBack = false];
+    //     }
+    // }
+
+    delete() {
+        this.product.deleteItem(this.lastId);
     }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -20,22 +20,27 @@ export class ProductService {
       .map((data: Response) => data.json())
       .subscribe(data => {
         data = data;
-      })
+      });
   }
 
   change(item) {
     item.isDone = !item.isDone;
+    const body = JSON.stringify(item);
+
+    this.http.put('http://localhost:3000/product/id', { body })
+      .map((data: Response) => data.json())
+      .subscribe(data => {
+        productList = data;
+      });
   }
 
   getAll() {
-    if (!productList) {
-      productListObs = this.http.get('http://localhost:3000/product');
-      productListObs.map((data: Response) => data.json())
-        .subscribe(data => {
-          productList = data;
-        })
-      return productList;
-    }
+    productListObs = this.http.get('http://localhost:3000/product');
+    productListObs.map((data: Response) => data.json())
+      .subscribe(data => {
+        productList = data;
+      });
+    return productList;
   }
 
   getProductListObs() {
@@ -47,7 +52,7 @@ export class ProductService {
   }
 
   getActiveObj(id: number) {
-    let activeObj = productList[id];
+    const activeObj = productList[id];
     return activeObj;
   }
 
@@ -56,6 +61,26 @@ export class ProductService {
       .map((data: Response) => data.json())
       .subscribe(data => {
         productList = data;
-      })
+      });
+    productList.forEach(function (item, i, arr) {
+      if (+id === item.id) {
+        item.name = newText;
+        item.about = newAbout;
+      }
+    });
+  }
+
+  deleteItem(id: number) {
+    const body = { id: id };
+    this.http.delete('http://localhost:3000/product/id', new RequestOptions({ body: body }))
+      .map((data: Response) => data.json())
+      .subscribe(data => {
+        data = data;
+      });
+    productList.forEach(function (item, i, arr) {
+      if (+id === item.id) {
+        productList.splice(i, 1);
+      }
+    });
   }
 }

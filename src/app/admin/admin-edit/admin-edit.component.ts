@@ -26,35 +26,39 @@ export class AdminEditComponent implements OnInit {
     };
     validationMessages = {
         name: {
-            required: "Can not be empty",
-            minlength: "Minimum 2 letters"
+            required: 'Can not be empty',
+            minlength: 'Minimum 2 letters'
         }
-    }
+    };
 
     constructor(private authService: AuthService,
         private product: ProductService,
         private router: Router,
         private activedRoute: ActivatedRoute,
         private fb: FormBuilder
-    ) {
-        this.activedRoute.params.subscribe(params => {
-            this.id = params['id'];
-            this.activeItem = this.product.getActiveObj(this.id);
-            this.product.getProductList()
-            this.formInit();
-        });
-
-    }
+    ) {}
 
     ngOnInit() {
+           this.activedRoute.params.subscribe(params => {
+            this.id = params['id'];
+            const prodList = this.product.getProductList();
+            prodList.forEach((item, i, arr) => {
+                if (item.id === +this.id) {
+                    this.activeItem = item;
+                }
+            });
+            this.product.getProductList();
+            this.formInit();
+            this.editForm.valueChanges.subscribe(data => this.valueChanged(data));
+        });
     }
 
     valueChanged(data) {
-        for (let field in this.formErrors) {
-            this.formErrors[field] = "";
-            const control = this.editForm.get(field);
+        for (const field in this.formErrors) {
+            this.formErrors[field] = '';
+            const control = this.editForm.get(field);         
             if (control.dirty) {
-                for (let key in control.errors) {
+                for (const key in control.errors) {
                     this.formErrors[field] = this.validationMessages[field][key];
                 }
             }
@@ -73,7 +77,7 @@ export class AdminEditComponent implements OnInit {
         this.editForm = this.fb.group({
             name: [this.activeItem.name, [Validators.required, Validators.minLength(2)]],
             about: [this.activeItem.about]
-        })
+        });
     }
 }
 
