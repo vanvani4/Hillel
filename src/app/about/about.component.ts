@@ -17,7 +17,7 @@ export class AboutComponent implements OnInit {
 
     aboutTitle = 'About Product';
     private id: number;
-    private activeItem: Product;
+    public activeItem: Product;
 
 
     constructor(private product: ProductService, private route: ActivatedRoute, private router: Router) {
@@ -41,6 +41,6 @@ export class AboutComponent implements OnInit {
     }
 
     close() {
-        this.router.navigate(['product']);
+        this.router.navigate(['api/product']);
     }
 }

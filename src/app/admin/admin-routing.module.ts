@@ -10,13 +10,13 @@ import { AdminEditComponent } from './admin-edit/admin-edit.component';
 
 const routes: Routes = [
   {
-    path: 'admin', component: ProductListComponent, canActivate: [AuthGuard],
+    path: 'api/admin', component: ProductListComponent, canActivate: [AuthGuard],
     children: [
       { path: '', component: AdminComponent },
       { path: ':id', component: AdminEditComponent },
     ]
   },
-  { path: 'login', component: LoginComponent }
+  { path: 'api/login', component: LoginComponent }
 ];
 
 @NgModule({

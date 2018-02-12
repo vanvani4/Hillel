@@ -1,38 +1,28 @@
-var express = require('express'); // подключаем экспресс
-
-var bodyParser = require('body-parser')
-
-var app = express(); // инициализация приложения
+var express = require('express');
+const app = express();
+const router = express.Router();
 
 var count = 5;
 
 var prod = [{
     id: 4,
-    name: "Молоко",
+    name: "Milk",
     isDone: false,
-    about: "1 литр"
+    about: "1 liter"
   },
   {
     id: 1,
-    name: "Хлеб",
+    name: "Bread",
     isDone: false,
-    about: "Батон, 1 штука"
+    about: "1 loaf"
   },
   {
     id: 3,
-    name: "Вода",
+    name: "Water",
     isDone: false,
-    about: "6 литров"
+    about: "6 liter"
   }];
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"/*"http://localhost:4200", "http://localhost:9876"*/);
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-  next();
-});
-
-app.use(bodyParser.json());
 
 app.get('/product', function (req, res) {
   res.json(prod);
@@ -61,7 +51,7 @@ app.delete('/product/id', function (req, res) {
 app.put('/admin', function (req, res) {
   prod.push({id: count, name: req.body.text, isDone: false, about: req.body.about})
   count++;
-  res.json(prod.length);
+  res.json(prod);
   console.log('put admin');
 });
 
@@ -76,6 +66,4 @@ app.put('/admin/id', function (req, res) {
   console.log('put admin/id');
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
+module.exports = router;

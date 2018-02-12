@@ -1,10 +1,42 @@
-nav {
+/* nav {
     margin-bottom: 10px;
     padding: 10px;
-}
+} */
 
 .active {
     color: black;
     background-color:#4AFF03;
+}
+
+/* .header {
+    width: inherit;
+    display: flex;
+    flex-flow: row nowrap;
+    border: 1px solid red;
+
+}
+.menu {
+    justify-content: flex-start
+}
+
+.login {
+    justify-content: flex-end;
+} */
+
+.header {
+	width: 100%;
+	max-width: 960px;
+	min-width: 430px;
+	margin: 0 auto 30px;
+	padding: 30px 0 10px;
+	display: -webkit-flex;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	box-sizing: border-box;
+}
+
+.menu__product {
+    margin-right: 10px;
 }
 

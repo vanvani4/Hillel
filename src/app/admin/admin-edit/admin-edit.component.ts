@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { ProductService } from '../../product/product.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -70,7 +70,7 @@ export class AdminEditComponent implements OnInit {
     }
 
     close() {
-        this.router.navigate(['admin']);
+        this.router.navigate(['api/admin']);
     }
 
     formInit() {

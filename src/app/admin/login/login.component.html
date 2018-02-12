@@ -3,7 +3,7 @@
   <form [formGroup]="loginForm" novalidate (ngSubmit)="log()">
     <div>
       <label for="login">Login</label>
-      <input formControlName="login" type="text" id="login">
+      <input formControlName="login" type="text" id="login" placeholder="admin@admin.com">
     </div>
 
     <div *ngIf="formErrors.login" class="alert">
@@ -11,7 +11,7 @@
     </div>
 
     <div>
-      <label for="password">Password</label>
+      <label for="password">Password(pass)</label>
       <input formControlName="password" type="password" id="password">
     </div>
 

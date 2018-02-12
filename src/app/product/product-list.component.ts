@@ -14,8 +14,6 @@ export class ProductListComponent implements OnInit {
 
     productList;
     lastId: number;
-    disabledBack = false;
-    disabledNext = false;
 
     constructor(private product: ProductService, private router: Router, private activedRoute: ActivatedRoute) {
     }
@@ -36,26 +34,6 @@ export class ProductListComponent implements OnInit {
     isLast(item: Product) {
         return item.id === this.lastId;
     }
-
-    // next() {
-    //     if (this.lastId === this.productList.length - 1) {
-    //         return this.disabledNext = true;
-    //     } else {
-    //         this.lastId++;
-    //         this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
-    //         return [this.disabledNext = false, this.disabledBack = false];
-    //     }
-    // }
-
-    // back() {
-    //     if (this.lastId === 0) {
-    //         return this.disabledBack = true;
-    //     } else {
-    //         this.lastId--;
-    //         this.router.navigate([this.lastId], { relativeTo: this.activedRoute });
-    //         return [this.disabledNext = false, this.disabledBack = false];
-    //     }
-    // }
 
     delete() {
         this.product.deleteItem(this.lastId);

@@ -1,10 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 
-html {
+/* html {
 	background: #ccc;
 	display: flex;
 	flex-direction: row;
 	display: -webkit-flex;
+}
+
+
+.body {
+    width: inherit;
+} */
+
+html {
+	background: #ccc;
+	min-height: 100%;
+	font-family: sans-serif;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: column;
+}
+
+body {
+	margin: 0;
+	padding: 0 15px;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: column;
+	flex: auto;
 }
 
 .done {

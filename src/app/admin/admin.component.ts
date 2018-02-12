@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { ProductService } from '../product/product.service';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -13,6 +13,8 @@ import { Product } from '../product/product';
   providers: [ProductService, AuthService]
 })
 export class AdminComponent implements OnInit {
+
+  // @Output() onChanged = new EventEmitter<boolean>();
 
   title = 'Product List';
 
@@ -57,6 +59,6 @@ export class AdminComponent implements OnInit {
   }
 
   addProduct(adminForm: FormGroup) {
-    this.product.add(adminForm.value.name, adminForm.value.about);
+    this.product.add(adminForm.value.name, adminForm.value.about);    
   }
 }

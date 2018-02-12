@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
             return true;                   // то сразу отпралвем на страницу которую пользователь хотел.
         } else {
             this.authService.redirectUrl = state.url; // если нет то в redirectUrl сохраняем текущий путь, от куда мы пришли.
-            this.router.navigate(['login']); // и отправляем пользователя на страницу login
+            this.router.navigate(['api/login']); // и отправляем пользователя на страницу login
             return false;
         }
     }

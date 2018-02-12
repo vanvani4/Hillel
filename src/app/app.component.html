@@ -1,8 +1,11 @@
-<nav>
-    <a routerLink="/product" routerLinkActive="active">Product list</a>
-    <a routerLink="/admin" routerLinkActive="active">Admin</a>
-    <a routerLink="/login" routerLinkActive="active">Login</a>
-
+<nav class="header">
+    <div class="menu">
+        <a class="menu__product" routerLink="/api/product" routerLinkActive="active">Product list</a>
+        <a class="menu__admin" routerLink="/api/admin" routerLinkActive="active">Admin</a>
+    </div>
+    <div class="login">
+        <a routerLink="/api/login" routerLinkActive="active">Login</a>
+    </div>
 </nav>
 
 <router-outlet></router-outlet>
