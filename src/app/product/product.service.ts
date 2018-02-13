@@ -16,7 +16,7 @@ export class ProductService {
   }
 
   add(text: string, about: string) {
-    this.http.put('https://stud-work.herokuapp.com/:442/api/admin', { text, about })
+    this.http.put('https://stud-work.herokuapp.com:443/api/admin', { text, about })
       .map((data: Response) => data.json())
       .subscribe(data => {
         productList = data;
@@ -28,7 +28,7 @@ export class ProductService {
     item.isDone = !item.isDone;
     const body = JSON.stringify(item);
 
-    this.http.put('https://stud-work.herokuapp.com/:442/api/product/id', { body })
+    this.http.put('https://stud-work.herokuapp.com:443/api/product/id', { body })
       .map((data: Response) => data.json())
       .subscribe(data => {
         productList = data;
@@ -36,7 +36,7 @@ export class ProductService {
   }
 
   getAll() {
-    productListObs = this.http.get('https://stud-work.herokuapp.com/:442/api/product');
+    productListObs = this.http.get('https://stud-work.herokuapp.com:443/api/product');
     productListObs.map((data: Response) => data.json())
       .subscribe(data => {
         productList = data;
@@ -58,7 +58,7 @@ export class ProductService {
   }
 
   editProduct(newText: string, newAbout: string, id: number) {
-    this.http.put('https://stud-work.herokuapp.com/:442/api/admin/id', { newText, newAbout, id })
+    this.http.put('https://stud-work.herokuapp.com:443/api/admin/id', { newText, newAbout, id })
       .map((data: Response) => data.json())
       .subscribe(data => {
         productList = data;
@@ -73,7 +73,7 @@ export class ProductService {
 
   deleteItem(id: number) {
     const body = { id: id };
-    this.http.delete('https://stud-work.herokuapp.com/:442/api/product/id', new RequestOptions({ body: body }))
+    this.http.delete('https://stud-work.herokuapp.com:443/api/product/id', new RequestOptions({ body: body }))
       .map((data: Response) => data.json())
       .subscribe(data => {
         data = data;

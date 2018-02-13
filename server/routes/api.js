@@ -24,12 +24,12 @@ var prod = [{
   }];
 
 
-app.get('/product', function (req, res) {
+router.get('/product', function (req, res) {
   res.json(prod);
   console.log('get product');
 });
 
-app.put('/product/id', function (req, res) {
+router.put('/product/id', function (req, res) {
   let val = JSON.parse(req.body.body);
   prod.forEach(function(item, i, prod) {
     if (val.id === item.id) {
@@ -39,7 +39,7 @@ app.put('/product/id', function (req, res) {
   console.log('put product/id');
 });
 
-app.delete('/product/id', function (req, res) {
+router.delete('/product/id', function (req, res) {
   prod.forEach(function(item, i, prod) {
     if (req.body.id === item.id) {
       prod.splice(i, 1);
@@ -48,14 +48,14 @@ app.delete('/product/id', function (req, res) {
   console.log('delete product/id');
 });
 
-app.put('/admin', function (req, res) {
+router.put('/admin', function (req, res) {
   prod.push({id: count, name: req.body.text, isDone: false, about: req.body.about})
   count++;
   res.json(prod);
   console.log('put admin');
 });
 
-app.put('/admin/id', function (req, res) {
+router.put('/admin/id', function (req, res) {
   prod.forEach(function(item, i, prod) {
     if (item.id === +req.body.id) {
       console.log();
